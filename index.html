@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet" />
+		<link rel="stylesheet" href="styles.css" />
+		<title>Piclette</title>
+	</head>
+	<body>
+		<main>
+			<div class="infoContainer">
+				<h1>Extrae los colores de tus fotos favoritas</h1>
+				<div class="lowerContainer">
+					<p>¿Quieres aplicar los colores de tus fotos en tu web, documento o proyecto?</p>
+					<p>Sube aquí la imagen para generar una paleta de colores coherente.</p>
+					<p>¿No te convence? Haz click en <i class="fa-solid fa-arrows-rotate"></i> y sigue probando hasta conseguir lo que buscas.</p>
+					<p>También puedes probar el funcionamiento con imágenes de muestra.</p>
+					<div class="btnContainer">
+						<button class="imgSelect btn">
+							Subir foto
+							<input type="file" accept="image/*" id="imgInput" />
+						</button>
+
+						<button id="randomPic" class="btn">Imagen de muestra</button>
+					</div>
+				</div>
+			</div>
+			<div class="extContainer">
+				<div id="loader-container">
+					<span class="loader" id="loader"></span>
+					<p class="loadMsg">Obteniendo colores...</p>
+				</div>
+				<div id="colorContainer"></div>
+			</div>
+
+			<canvas id="canvas"></canvas>
+		</main>
+		<script src="scriptFontAwesome.js"></script>
+		<script src="ntc.js"></script>
+		<script src="script.js"></script>
+	</body>
+</html>

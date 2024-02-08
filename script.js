@@ -12,10 +12,9 @@ window.onload = () => {
 	const copyRootBtn = document.getElementById("copyRoot");
 
 	//info para el canvas
-	const MAX_WIDTH = canvas.clientWidth;
-	const MAX_HEIGHT = canvas.clientHeight;
+	const MAX_WIDTH = window.innerWidth * 0.4;
+	const MAX_HEIGHT = window.innerHeight * 0.8;
 	const BORDER_RADIUS = 8;
-
 	let imgLoaded = false;
 
 	const randomIntBetween = (a, b) => {
@@ -42,29 +41,24 @@ window.onload = () => {
 
 				let width = img.width;
 				let height = img.height;
+				let aspectRatio = width / height;
+
 				// Calcula las nuevas dimensiones manteniendo la proporción
-				if (width > MAX_WIDTH || height > MAX_HEIGHT) {
-					let aspectRatio = width / height;
-					if (width > height) {
-						width = MAX_WIDTH;
-						height = width / aspectRatio;
-					} else {
-						height = MAX_HEIGHT;
-						width = height * aspectRatio;
-					}
+				if (height > MAX_HEIGHT) {
+					height = MAX_HEIGHT;
+					width = height * aspectRatio;
 				}
+
+				if (width > MAX_WIDTH) {
+					console.log("height supera max");
+					width = MAX_WIDTH;
+					height = width / aspectRatio;
+				}
+
 				canvas.width = width;
 				canvas.height = height;
-				//para que los bordes sean redondeados
-				ctx.beginPath();
-				ctx.moveTo(BORDER_RADIUS, 0);
-				ctx.arcTo(width, 0, width, height, BORDER_RADIUS);
-				ctx.arcTo(width, height, 0, height, BORDER_RADIUS);
-				ctx.arcTo(0, height, 0, 0, BORDER_RADIUS);
-				ctx.arcTo(0, 0, width, 0, BORDER_RADIUS);
-				ctx.closePath();
-				ctx.clip();
-				ctx.drawImage(img, 0, 0, width, height);
+
+				ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
 				imgLoaded = true; // Marca la imagen como cargada
 			};
 			img.src = fr.result;
@@ -87,31 +81,28 @@ window.onload = () => {
 
 		// Agregar un listener para cargar la imagen una vez que esté cargada
 		img.onload = () => {
+			reload();
+
 			let width = img.width;
 			let height = img.height;
+			let aspectRatio = width / height;
+
 			// Calcula las nuevas dimensiones manteniendo la proporción
-			if (width > MAX_WIDTH || height > MAX_HEIGHT) {
-				let aspectRatio = width / height;
-				if (width > height) {
-					width = MAX_WIDTH;
-					height = width / aspectRatio;
-				} else {
-					height = MAX_HEIGHT;
-					width = height * aspectRatio;
-				}
+			if (height > MAX_HEIGHT) {
+				height = MAX_HEIGHT;
+				width = height * aspectRatio;
 			}
+
+			if (width > MAX_WIDTH) {
+				console.log("height supera max");
+				width = MAX_WIDTH;
+				height = width / aspectRatio;
+			}
+
 			canvas.width = width;
 			canvas.height = height;
-			//para que los bordes sean redondeados
-			ctx.beginPath();
-			ctx.moveTo(BORDER_RADIUS, 0);
-			ctx.arcTo(width, 0, width, height, BORDER_RADIUS);
-			ctx.arcTo(width, height, 0, height, BORDER_RADIUS);
-			ctx.arcTo(0, height, 0, 0, BORDER_RADIUS);
-			ctx.arcTo(0, 0, width, 0, BORDER_RADIUS);
-			ctx.closePath();
-			ctx.clip();
-			ctx.drawImage(img, 0, 0, width, height);
+
+			ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
 			imgLoaded = true; // Marca la imagen como cargada
 		};
 

@@ -32,18 +32,25 @@ main {
     padding: 5rem 3rem 3rem;
     grid-template-areas: 'info canvas' 'palette canvas';
     grid-template-columns: repeat(2, minmax(400px, 1fr));
-    grid-template-rows: minmax(25vh, 1fr) minmax(35vh, 1.5fr);
+    grid-template-rows: minmax(25vh, 1fr) minmax(30vh, 1fr);
     gap: 5rem;
 }
 
 canvas {
-    grid-area: canvas;
+
     align-self: start;
-    border-radius: 10px;
     width: 100%;
     height: 100%;
     object-fit: cover;
+    overflow: hidden;
 
+}
+
+.canvasContainer {
+    border-radius: 10px;
+    grid-area: canvas;
+    max-height: 80vh;
+    overflow: hidden;
 }
 
 

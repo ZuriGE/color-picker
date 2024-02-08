@@ -262,12 +262,7 @@ window.onload = () => {
 		});
 		copyRootBtn.disabled = false;
 		loader.style.display = "none";
-		// setTimeout(() => {
-		// 	palette.scrollIntoView({
-		// 		behavior: "smooth",
-		// 		block: "start",
-		// 	});
-		// }, 200);
+		// git add
 	};
 
 	const getContrastColor = (r, g, b) => {

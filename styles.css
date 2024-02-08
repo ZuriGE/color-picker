@@ -29,11 +29,10 @@ main {
     display: grid;
     width: 90vw;
     height: auto;
-    min-height: 90vh;
     padding: 5rem 3rem 3rem;
     grid-template-areas: 'info canvas' 'palette canvas';
     grid-template-columns: repeat(2, minmax(400px, 1fr));
-    grid-template-rows: repeat(2, auto);
+    grid-template-rows: minmax(25vh, 1fr) minmax(35vh, 1.5fr);
     gap: 5rem;
 }
 

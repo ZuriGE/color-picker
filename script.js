@@ -250,7 +250,6 @@ window.onload = () => {
 			}
 		}
 		copyRoot = copyRoot + `\n}`;
-		console.log(copyRoot);
 
 		copyRootBtn.addEventListener("click", () => {
 			let tempInput = document.createElement("input");

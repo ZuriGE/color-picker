@@ -57,7 +57,7 @@ window.onload = () => {
 				canvas.width = width;
 				canvas.height = height;
 
-				ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+				ctx.drawImage(img, 0, 0, width, height);
 				imgLoaded = true; // Marca la imagen como cargada
 			};
 			img.src = fr.result;
@@ -74,7 +74,7 @@ window.onload = () => {
 		let index = Math.floor(Math.random() * 17) + 1;
 
 		// Crear una nueva imagen
-		let img = new Image();
+		const img = new Image();
 
 		reload();
 
@@ -100,7 +100,7 @@ window.onload = () => {
 			canvas.width = width;
 			canvas.height = height;
 
-			ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+			ctx.drawImage(img, 0, 0, width, height);
 			imgLoaded = true; // Marca la imagen como cargada
 		};
 

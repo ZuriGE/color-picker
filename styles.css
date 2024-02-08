@@ -33,7 +33,7 @@ main {
     grid-template-areas: 'info canvas' 'palette canvas';
     grid-template-columns: repeat(2, minmax(400px, 1fr));
     grid-template-rows: minmax(25vh, 1fr) minmax(30vh, 1fr);
-    gap: 5rem;
+    gap: 3rem;
 }
 
 canvas {
@@ -285,7 +285,7 @@ button:disabled:active {
     main {
         width: 95vw;
         padding: 3rem 2rem 2rem;
-        gap: 3rem;
+        gap: 2rem;
     }
 }
 

@@ -50,7 +50,6 @@ window.onload = () => {
 				}
 
 				if (width > MAX_WIDTH) {
-					console.log("height supera max");
 					width = MAX_WIDTH;
 					height = width / aspectRatio;
 				}
@@ -363,7 +362,11 @@ window.onload = () => {
 	};
 
 	const arraysEqual = (arr1, arr2) => {
-		if (arr1.length !== arr2.length) return false;
+		if (!Array.isArray(arr1) || !Array.isArray(arr2) || arr1.length !== arr2.length) {
+			return false;
+		}
+
+		// if (arr1.length !== arr2.length) return false;
 		for (let i = 0; i < arr1.length; i++) {
 			if (arr1[i] !== arr2[i]) return false;
 		}

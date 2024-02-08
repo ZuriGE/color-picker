@@ -9,6 +9,8 @@ window.onload = () => {
 	const loader = document.getElementById("loader-container");
 	loader.style.display = "none";
 
+	const copyRootBtn = document.getElementById("copyRoot");
+
 	//info para el canvas
 	const MAX_WIDTH = canvas.clientWidth;
 	const MAX_HEIGHT = canvas.clientHeight;
@@ -123,10 +125,7 @@ window.onload = () => {
 		if (e) {
 			e.preventDefault();
 		}
-		if (!imgLoaded) {
-			alert("Cargue una imagen primero");
-			return;
-		}
+
 		reload();
 
 		//con esto obtenemos el valor de cada pixel
@@ -134,7 +133,7 @@ window.onload = () => {
 		const pixels = imageData.data;
 		let rgbPixels = [];
 
-		// Recorrer los datos de píxeles y obtener los valores RGB y alfa
+		// Recorre los datos de píxeles y obtener los valores RGB y alfa
 		for (let i = 0; i < pixels.length; i += 4) {
 			const red = pixels[i];
 			const green = pixels[i + 1];
@@ -156,6 +155,7 @@ window.onload = () => {
 			return centroid.map((num) => Math.round(num));
 		});
 
+		let copyRoot = `:root {`;
 		for (let i = 0; i < mainColors.length; i++) {
 			if (mainColors[i].length === 3) {
 				let r = mainColors[i][0];
@@ -188,11 +188,36 @@ window.onload = () => {
 				hexaCode.style.color = textColor;
 				hexaCode.innerText = hexadecimal;
 
-				newColor.appendChild(hexaCode);
-
 				let colorName = document.createElement("span");
 				colorName.style.color = textColor;
 				colorName.innerText = ntc.name(hexadecimal);
+
+				//Botón para copiar un único color
+				let copyBtn = document.createElement("button");
+				copyBtn.classList.add("copyBtn");
+				let copyIcon = document.createElement("i");
+				copyIcon.style.color = textColor;
+				copyIcon.classList.add("fa-regular", "fa-copy");
+				copyBtn.appendChild(copyIcon);
+
+				copyBtn.addEventListener("click", () => {
+					let tempInput = document.createElement("input");
+					tempInput.value = hexadecimal;
+
+					// Agregar el elemento temporal al DOM
+					document.body.appendChild(tempInput);
+
+					// Seleccionar el texto dentro del elemento temporal
+					tempInput.select();
+
+					// Ejecutar el comando de copiar
+					document.execCommand("copy");
+
+					// Eliminar el elemento temporal del DOM
+					document.body.removeChild(tempInput);
+				});
+				newColor.appendChild(hexaCode);
+				colorName.appendChild(copyBtn);
 
 				newColor.appendChild(colorName);
 
@@ -221,18 +246,36 @@ window.onload = () => {
 				}
 
 				palette.appendChild(newColor);
+				copyRoot = copyRoot + `\n--${ntc.name(hexadecimal).toLowerCase().replace(/\s+/g, "_")}: ${hexadecimal};`;
 			}
 		}
+		copyRoot = copyRoot + `\n}`;
+		console.log(copyRoot);
 
+		copyRootBtn.addEventListener("click", () => {
+			let tempInput = document.createElement("input");
+			tempInput.value = copyRoot;
+			document.body.appendChild(tempInput);
+			tempInput.select();
+			document.execCommand("copy");
+			document.body.removeChild(tempInput);
+		});
+		copyRootBtn.disabled = false;
 		loader.style.display = "none";
+		setTimeout(() => {
+			palette.scrollIntoView({
+				behavior: "smooth",
+				block: "start",
+			});
+		}, 200);
 	};
 
 	const getContrastColor = (r, g, b) => {
-		// Calcular el contraste utilizando la fórmula de luminosidad relativa
+		// Calcula el contraste utilizando la fórmula de luminosidad relativa
 		let luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
 
-		// Retorna blanco si el contraste es menor o igual a 0.5 (color oscuro),
-		// de lo contrario, retorna negro (color claro)
+		// Devuelve blanco si el contraste es menor o igual a 0.5 (color oscuro),
+		// si no, devuelve negro (color claro)
 		return luminance <= 0.5 ? "#ffffff" : "#000000";
 	};
 

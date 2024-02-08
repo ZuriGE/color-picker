@@ -28,10 +28,10 @@ body {
 main {
     display: grid;
     width: 90vw;
-    height: 100%;
+    height: auto;
     padding: 5rem 3rem 3rem;
     grid-template-areas: 'info canvas' 'palette canvas';
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(2, minmax(400px, 1fr));
     grid-template-rows: 2fr 3fr;
     gap: 5rem;
 }
@@ -40,7 +40,6 @@ canvas {
     grid-area: canvas;
     align-self: start;
     border-radius: 10px;
-
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -83,7 +82,7 @@ canvas {
 
 
 .imgSelect {
-    background-color: #3f4552;
+    background-color: #1c1f25;
     width: 180px;
     height: 40px;
     border-radius: 5px;
@@ -112,7 +111,7 @@ button {
     border: none;
     outline: none;
     cursor: pointer;
-    background-color: #3f4552;
+    background-color: #1c1f25;
     width: 180px;
     height: 40px;
     border-radius: 5px;
@@ -128,6 +127,20 @@ button {
 #imgInput {
     cursor: pointer;
 }
+
+button:disabled {
+    opacity: 0.5;
+}
+
+button:disabled:hover {
+    background-color: #1c1f25;
+    cursor: not-allowed
+}
+
+button:disabled:active {
+    transform: none;
+}
+
 
 
 .infoContainer {
@@ -158,6 +171,7 @@ button {
     padding-top: 1.2rem;
 }
 
+.btnContainer .btn:nth-child(2),
 .btnContainer .btn:first-child {
     margin-right: 3rem;
 }
@@ -227,11 +241,89 @@ button {
 .refreshBtn {
     all: unset;
     position: absolute;
-    top: 15px;
+    top: 0;
+    bottom: 0;
+    margin: auto;
     right: 15px
 }
 
 .refreshBtn {
     font-size: 1.8rem;
     cursor: pointer;
+}
+
+.copyBtn {
+    background: none;
+    width: 20px;
+    height: 20px;
+}
+
+.paletteColor span {
+    display: flex;
+    position: relative;
+
+}
+
+
+.copyBtn {
+    position: absolute;
+    right: -24px
+}
+
+@media (max-width:1024px) {
+    html {
+        font-size: 14px;
+    }
+
+    main {
+        width: 95vw;
+        padding: 3rem 2rem 2rem;
+        gap: 3rem;
+    }
+}
+
+@media (max-width:934px) {
+    html {
+        font-size: 14px;
+    }
+
+    main {
+        width: 100vw;
+        padding: 5rem 3rem 3rem;
+        grid-template-areas: 'info' 'canvas' 'palette';
+        grid-template-columns: auto;
+        grid-template-rows: repeat(3, auto);
+
+    }
+
+    canvas {
+        width: 100%;
+        max-width: 100%;
+        max-height: 100%;
+    }
+
+    .imgSelect,
+    button {
+        width: 25vw;
+    }
+
+    .paletteColor {
+        height: 60px;
+    }
+}
+
+@media (max-width:690px) {
+    .btnContainer {
+        flex-direction: column;
+    }
+
+    .btnContainer .btn {
+        margin: 0 0 20px;
+        width: 100%;
+    }
+
+    html {
+        font-size: 12px;
+    }
+
 }

@@ -93,7 +93,6 @@ window.onload = () => {
 			}
 
 			if (width > MAX_WIDTH) {
-				console.log("height supera max");
 				width = MAX_WIDTH;
 				height = width / aspectRatio;
 			}

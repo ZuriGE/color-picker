@@ -76,7 +76,7 @@ window.onload = () => {
 		// Crear una nueva imagen
 		const img = new Image();
 
-		reload();
+		// reload();
 
 		// Agregar un listener para cargar la imagen una vez que esté cargada
 		img.onload = () => {
